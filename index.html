@@ -40,7 +40,7 @@
             padding: 0 20px;
         }
 
-        /* Page Sections */
+        /* Page Sections - FIXED CENTERING */
         .page {
             position: absolute;
             top: 0;
@@ -55,6 +55,7 @@
             opacity: 0;
             transition: opacity 0.5s ease;
             overflow-y: auto;
+            text-align: center;
         }
 
         .page.active {
@@ -102,13 +103,14 @@
             font-size: 0.9rem;
         }
 
-        /* Home Page */
+        /* Home Page - FIXED CENTERING */
         .home-content {
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
             max-width: 800px;
+            width: 100%;
         }
 
         .profile-image {
@@ -126,6 +128,8 @@
             font-weight: 700;
             margin-bottom: 10px;
             line-height: 1.2;
+            text-align: center;
+            width: 100%;
         }
 
         .text-gradient {
@@ -138,6 +142,8 @@
         .typing-container {
             margin-bottom: 15px;
             height: 35px;
+            text-align: center;
+            width: 100%;
         }
 
         .typing {
@@ -151,12 +157,16 @@
             color: var(--text-gray);
             margin-bottom: 25px;
             max-width: 600px;
+            text-align: center;
+            width: 100%;
         }
 
         .social-links {
             display: flex;
             gap: 12px;
             margin-top: 15px;
+            justify-content: center;
+            width: 100%;
         }
 
         .social-icon {
@@ -179,10 +189,14 @@
             box-shadow: 0 10px 20px rgba(155, 89, 182, 0.3);
         }
 
-        /* About Page */
+        /* About Page - FIXED CENTERING */
         .about-content {
             max-width: 800px;
             text-align: center;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .section-title {
@@ -190,6 +204,8 @@
             margin-bottom: 25px;
             color: var(--text-light);
             position: relative;
+            text-align: center;
+            width: 100%;
         }
 
         .section-title::after {
@@ -209,6 +225,9 @@
             color: var(--text-gray);
             margin-bottom: 25px;
             line-height: 1.7;
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
         }
 
         .about-details {
@@ -216,6 +235,8 @@
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 15px;
             margin-bottom: 25px;
+            width: 100%;
+            max-width: 600px;
         }
 
         .detail-item {
@@ -226,6 +247,7 @@
             background: var(--background-light);
             border-radius: var(--border-radius);
             transition: var(--transition);
+            text-align: left;
         }
 
         .detail-item:hover {
@@ -251,6 +273,8 @@
 
         .cv-download {
             margin-top: 15px;
+            text-align: center;
+            width: 100%;
         }
 
         /* Skills Page - Compact Layout */
@@ -259,6 +283,9 @@
             text-align: center;
             width: 100%;
             padding: 0 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .skills-grid {
@@ -377,12 +404,15 @@
             font-size: 0.85rem;
         }
 
-        /* Projects Page - FIXED CENTERING */
+        /* Projects Page - FIXED CENTERING & VISIBILITY */
         .projects-content {
             max-width: 1000px;
             text-align: center;
             width: 100%;
             padding: 0 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .projects-grid {
@@ -391,6 +421,9 @@
             gap: 15px;
             margin-top: 25px;
             width: 100%;
+            max-height: 70vh;
+            overflow-y: auto;
+            padding: 10px;
         }
 
         .project-card {
@@ -401,6 +434,7 @@
             border: 1px solid transparent;
             display: flex;
             flex-direction: column;
+            min-height: 300px;
         }
 
         .project-card:hover {
@@ -440,12 +474,14 @@
             display: flex;
             flex-direction: column;
             flex: 1;
+            justify-content: space-between;
         }
 
         .project-card h3 {
             color: var(--text-light);
             margin-bottom: 10px;
             font-size: 1.2rem;
+            text-align: center;
         }
 
         .project-card p {
@@ -453,6 +489,7 @@
             margin-bottom: 12px;
             line-height: 1.5;
             font-size: 0.9rem;
+            text-align: center;
         }
 
         .project-tech {
@@ -513,12 +550,15 @@
             width: 100%;
         }
 
-        /* Contact Page */
+        /* Contact Page - FIXED CENTERING */
         .contact-content {
             max-width: 800px;
             text-align: center;
             width: 100%;
             padding: 0 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .contact-info {
@@ -527,6 +567,7 @@
             gap: 15px;
             margin-top: 25px;
             width: 100%;
+            max-width: 600px;
         }
 
         .contact-item {
@@ -560,7 +601,7 @@
 
         .contact-details {
             flex: 1;
-            min-width: 0; /* Prevents overflow */
+            min-width: 0;
         }
 
         .contact-details h4 {
@@ -573,7 +614,7 @@
             color: var(--text-gray);
             text-decoration: none;
             transition: var(--transition);
-            word-break: break-all; /* Ensures long text wraps */
+            word-break: break-all;
             font-size: 0.9rem;
         }
 
@@ -618,8 +659,19 @@
                 height: 150px;
             }
 
-            /* FIXED: About page better centering on mobile */
-            .about-content {
+            /* FIXED: Better centering for all pages on mobile */
+            .page {
+                padding: 15px;
+                justify-content: flex-start;
+                padding-top: 40px;
+                padding-bottom: 80px;
+            }
+
+            .home-content,
+            .about-content,
+            .skills-content,
+            .projects-content,
+            .contact-content {
                 padding: 0 10px;
                 width: 100%;
             }
@@ -637,6 +689,7 @@
 
             .projects-grid {
                 margin-top: 15px;
+                max-height: 60vh;
             }
 
             .project-card {
@@ -686,7 +739,9 @@
             }
             
             .page {
-                padding: 15px;
+                padding: 10px;
+                padding-top: 30px;
+                padding-bottom: 70px;
             }
 
             /* FIXED: Extra mobile adjustments for better centering */
@@ -704,6 +759,16 @@
 
             .contact-item {
                 padding: 15px;
+            }
+
+            /* FIXED: Ensure all content fits on mobile */
+            .projects-grid {
+                max-height: 55vh;
+                gap: 10px;
+            }
+
+            .project-card {
+                min-height: 250px;
             }
         }
     </style>
@@ -879,7 +944,6 @@
                             <span class="tech-tag">CSS</span>
                             <span class="tech-tag">JavaScript</span>
                         </div>
-                        <!-- Removed Live Demo and View Code links -->
                     </div>
                 </div>
 
