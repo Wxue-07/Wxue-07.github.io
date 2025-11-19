@@ -377,10 +377,12 @@
             font-size: 0.85rem;
         }
 
-        /* Projects Page */
+        /* Projects Page - FIXED CENTERING */
         .projects-content {
             max-width: 1000px;
             text-align: center;
+            width: 100%;
+            padding: 0 15px;
         }
 
         .projects-grid {
@@ -388,6 +390,7 @@
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 15px;
             margin-top: 25px;
+            width: 100%;
         }
 
         .project-card {
@@ -396,6 +399,8 @@
             overflow: hidden;
             transition: var(--transition);
             border: 1px solid transparent;
+            display: flex;
+            flex-direction: column;
         }
 
         .project-card:hover {
@@ -432,6 +437,9 @@
 
         .project-content {
             padding: 18px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
         }
 
         .project-card h3 {
@@ -464,16 +472,25 @@
             font-weight: 500;
         }
 
+        /* FIXED: Coming Soon Cards - Perfect Centering */
         .coming-soon {
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 180px;
+            height: 100%;
+            width: 100%;
         }
 
         .coming-soon-content {
             text-align: center;
             color: var(--text-gray);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
         }
 
         .coming-soon-content i {
@@ -486,16 +503,22 @@
             color: var(--text-light);
             margin-bottom: 0.8rem;
             font-size: 1.2rem;
+            text-align: center;
+            width: 100%;
         }
 
         .coming-soon-content p {
             font-size: 0.9rem;
+            text-align: center;
+            width: 100%;
         }
 
         /* Contact Page */
         .contact-content {
             max-width: 800px;
             text-align: center;
+            width: 100%;
+            padding: 0 15px;
         }
 
         .contact-info {
@@ -503,6 +526,7 @@
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 15px;
             margin-top: 25px;
+            width: 100%;
         }
 
         .contact-item {
@@ -557,7 +581,7 @@
             color: var(--primary-color);
         }
 
-        /* Responsive Design */
+        /* Responsive Design - FIXED MOBILE LAYOUT */
         @media (max-width: 768px) {
             .home-title {
                 font-size: 2.3rem;
@@ -593,6 +617,49 @@
                 width: 150px;
                 height: 150px;
             }
+
+            /* FIXED: About page better centering on mobile */
+            .about-content {
+                padding: 0 10px;
+                width: 100%;
+            }
+
+            .about-text {
+                text-align: center;
+                padding: 0 10px;
+            }
+
+            /* FIXED: Projects page not blocked on mobile */
+            .projects-content {
+                padding: 0 10px;
+                width: 100%;
+            }
+
+            .projects-grid {
+                margin-top: 15px;
+            }
+
+            .project-card {
+                margin: 0 auto;
+                max-width: 100%;
+            }
+
+            /* FIXED: Contact page better centering on mobile */
+            .contact-content {
+                padding: 0 10px;
+                width: 100%;
+            }
+
+            .contact-item {
+                justify-content: center;
+                text-align: center;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .contact-details {
+                text-align: center;
+            }
         }
 
         @media (max-width: 480px) {
@@ -619,6 +686,23 @@
             }
             
             .page {
+                padding: 15px;
+            }
+
+            /* FIXED: Extra mobile adjustments for better centering */
+            .about-content,
+            .projects-content,
+            .contact-content {
+                padding: 0 5px;
+            }
+
+            .about-text,
+            .project-card p,
+            .contact-details {
+                text-align: center;
+            }
+
+            .contact-item {
                 padding: 15px;
             }
         }
