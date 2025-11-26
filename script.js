@@ -1,25 +1,23 @@
-// Mobile Navigation
-const hamburger = document.querySelector('.hamburger');
-const navMenu = document.querySelector('.nav-menu');
-const navLinks = document.querySelectorAll('.nav-link');
-
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
-});
-
-// Close mobile menu when clicking on a link
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
+// Page Navigation
+function showPage(pageId) {
+    // Hide all pages
+    document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
     });
-});
+    
+    // Show selected page
+    document.getElementById(pageId).classList.add('active');
+    
+    // Animate skills when skills page is shown
+    if (pageId === 'skills') {
+        setTimeout(animateSkills, 300);
+    }
+}
 
 // Typing Effect
 const typingElement = document.querySelector('.typing');
 if (typingElement) {
-    const texts = ['Web Developer', 'UI/UX Enthusiast', 'Student', 'Tech Lover'];
+    const texts = ['Student', 'Web Developer', 'UI/UX Enthusiast', 'Tech Lover'];
     let textIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
@@ -54,127 +52,47 @@ if (typingElement) {
     setTimeout(type, 1000);
 }
 
-// Animate skill bars when they come into view
-const skillBars = document.querySelectorAll('.progress-fill');
-const observerOptions = {
-    threshold: 0.5,
-    rootMargin: '0px 0px -100px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const skillBar = entry.target;
-            const width = skillBar.getAttribute('data-width');
-            skillBar.style.width = width + '%';
-            
-            // Animate percentage text
-            const percentElement = skillBar.closest('.skill-progress').querySelector('.skill-percent');
-            if (percentElement) {
-                let current = 0;
-                const target = parseInt(width);
-                const duration = 2000;
-                const step = target / (duration / 16);
-                
-                const animatePercent = () => {
-                    current += step;
-                    if (current >= target) {
-                        current = target;
-                        percentElement.textContent = target + '%';
-                    } else {
-                        percentElement.textContent = Math.floor(current) + '%';
-                        requestAnimationFrame(animatePercent);
-                    }
-                };
-                animatePercent();
-            }
-        }
-    });
-}, observerOptions);
-
-skillBars.forEach(bar => {
-    observer.observe(bar);
-});
-
-// Navbar background on scroll
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 100) {
-        navbar.style.background = 'rgba(26, 26, 26, 0.98)';
-        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
-    } else {
-        navbar.style.background = 'rgba(26, 26, 26, 0.95)';
-        navbar.style.boxShadow = 'none';
-    }
-});
-
-// Active navigation link based on scroll position
-const sections = document.querySelectorAll('section');
-window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (scrollY >= (sectionTop - 200)) {
-            current = section.getAttribute('id');
-        }
-    });
-
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === '#' + current) {
-            link.classList.add('active');
-        }
-    });
-});
-
-// Contact form handling
-document.addEventListener('DOMContentLoaded', function() {
-    const contactForm = document.getElementById('contactForm');
+// Animate Skills Progress Bars
+function animateSkills() {
+    const skillBars = document.querySelectorAll('.progress-fill');
+    const percentElements = document.querySelectorAll('.skill-percent');
     
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const nameInput = document.getElementById('name');
-            const emailInput = document.getElementById('email');
-            const messageInput = document.getElementById('message');
-            
-            if (nameInput && emailInput && messageInput) {
-                const name = nameInput.value;
-                const email = emailInput.value;
-                const message = messageInput.value;
-
-                    // Simple validation
-                    if (name && email && message) {
-                        alert(`Thank you for your message, ${name}! I'll get back to you soon.`);
-                        contactForm.reset();
-                    } else {
-                        alert('Please fill in all required fields.');
-                    }            }
-        });
-    }
-});
-
-// Smooth scrolling for navigation links
-navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetId = link.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
+    skillBars.forEach((bar, index) => {
+        const width = bar.getAttribute('data-width');
+        const percentElement = percentElements[index];
         
-        if (targetSection) {
-            window.scrollTo({
-                top: targetSection.offsetTop - 80,
-                behavior: 'smooth'
-            });
-        }
+        // Reset to 0
+        bar.style.width = '0%';
+        percentElement.textContent = '0%';
+        
+        // Animate to target width
+        setTimeout(() => {
+            let current = 0;
+            const target = parseInt(width);
+            const duration = 1500;
+            const increment = target / (duration / 16);
+            
+            const animate = () => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    bar.style.width = target + '%';
+                    percentElement.textContent = target + '%';
+                } else {
+                    bar.style.width = current + '%';
+                    percentElement.textContent = Math.floor(current) + '%';
+                    requestAnimationFrame(animate);
+                }
+            };
+            
+            animate();
+        }, index * 200);
     });
-});
+}
 
-// Clean up timeouts when page unloads
-window.addEventListener('beforeunload', function() {
-    if (typingTimeout) {
-        clearTimeout(typingTimeout);
+// Animate skills when page loads if on skills page
+document.addEventListener('DOMContentLoaded', function() {
+    if (document.getElementById('skills').classList.contains('active')) {
+        setTimeout(animateSkills, 500);
     }
 });
