@@ -134,17 +134,22 @@ body {
     background-clip: text;
 }
 
+/* FIXED: Typing container centering */
 .typing-container {
     margin-bottom: 15px;
     height: 35px;
     text-align: center;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .typing {
     font-size: 1.6rem;
     color: var(--primary-color);
     font-weight: 600;
+    text-align: center;
 }
 
 .home-description {
@@ -267,10 +272,13 @@ body {
     font-size: 0.9rem;
 }
 
+/* FIXED: Download CV button centering */
 .cv-download {
     margin-top: 15px;
     text-align: center;
     width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 /* Skills Page - Compact Layout */
