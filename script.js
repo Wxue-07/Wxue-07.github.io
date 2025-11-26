@@ -1,20 +1,27 @@
-// Page Navigation
+// Page Navigation - FIXED MOBILE NAVBAR
 function showPage(pageId) {
+    console.log('Navigating to:', pageId); // Debug line
+    
     // Hide all pages
     document.querySelectorAll('.page').forEach(page => {
         page.classList.remove('active');
     });
     
     // Show selected page
-    document.getElementById(pageId).classList.add('active');
-    
-    // Animate skills when skills page is shown
-    if (pageId === 'skills') {
-        setTimeout(animateSkills, 300);
+    const targetPage = document.getElementById(pageId);
+    if (targetPage) {
+        targetPage.classList.add('active');
+        
+        // Animate skills when skills page is shown
+        if (pageId === 'skills') {
+            setTimeout(animateSkills, 300);
+        }
+    } else {
+        console.error('Page not found:', pageId);
     }
 }
 
-// Typing Effect
+// Typing Effect - FIXED CENTERING
 const typingElement = document.querySelector('.typing');
 if (typingElement) {
     const texts = ['Student', 'Web Developer', 'UI/UX Enthusiast', 'Tech Lover'];
@@ -92,6 +99,16 @@ function animateSkills() {
 
 // Animate skills when page loads if on skills page
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('Portfolio loaded successfully!'); // Debug line
+    
+    // Add click event listeners for mobile compatibility
+    document.querySelectorAll('.nav-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const pageId = this.getAttribute('onclick').match(/'([^']+)'/)[1];
+            showPage(pageId);
+        });
+    });
+    
     if (document.getElementById('skills').classList.contains('active')) {
         setTimeout(animateSkills, 500);
     }
